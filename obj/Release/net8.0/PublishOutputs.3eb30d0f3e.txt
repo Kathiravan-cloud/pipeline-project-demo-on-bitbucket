@@ -1,0 +1,7 @@
+C:\Dev-Qc\Dev-Qc-project\obj\Release\net8.0\PubTmp\Out\Dev-Qc-project.exe
+C:\Dev-Qc\Dev-Qc-project\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+C:\Dev-Qc\Dev-Qc-project\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Dev-Qc\Dev-Qc-project\obj\Release\net8.0\PubTmp\Out\Dev-Qc-project.dll
+C:\Dev-Qc\Dev-Qc-project\obj\Release\net8.0\PubTmp\Out\Dev-Qc-project.deps.json
+C:\Dev-Qc\Dev-Qc-project\obj\Release\net8.0\PubTmp\Out\Dev-Qc-project.runtimeconfig.json
+C:\Dev-Qc\Dev-Qc-project\obj\Release\net8.0\PubTmp\Out\Dev-Qc-project.pdb

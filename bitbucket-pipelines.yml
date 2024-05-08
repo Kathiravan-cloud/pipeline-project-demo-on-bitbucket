@@ -1,0 +1,35 @@
+image: mcr.microsoft.com/dotnet/sdk:latest
+
+pipelines:
+  branches:
+    Develop:
+      - step:
+          name: "Build"
+          script:
+            - export SOLUTION_NAME=Dev-Qc-project          
+            - export CONFIGURATION=Release
+            - export API_PROJECT_NAME=Dev-Qc-project
+            - export REPORTS_REL_PATH=./test-reports/build_${BITBUCKET_BUILD_NUMBER}  
+            - apt update && apt install zip -y
+            - dotnet restore $SOLUTION_NAME.sln
+            - dotnet build --no-restore $SOLUTION_NAME.sln --configuration $CONFIGURATION
+            #- dotnet test $SOLUTION_NAME.Tests
+            - dotnet publish --configuration $CONFIGURATION --no-build ${API_PROJECT_NAME}.csproj -o ./publish
+            - cd ./publish
+            - ls -larth 
+            - zip -r ../API-$BITBUCKET_BUILD_NUMBER.zip .
+          artifacts: 
+            - API-*.zip
+
+      - step:
+          name: "Deploy to Azure"
+          deployment: Dev
+          script:
+            - pipe: microsoft/azure-web-apps-deploy:1.0.0
+              variables:
+                AZURE_APP_ID: $AZURE_APP_ID
+                AZURE_PASSWORD: $AZURE_PASSWORD
+                AZURE_TENANT_ID: $AZURE_TENANT_ID
+                AZURE_RESOURCE_GROUP: $RESOURCE_GROUP
+                AZURE_APP_NAME: $APP_NAME
+                ZIP_FILE: 'API-$BITBUCKET_BUILD_NUMBER.zip'
